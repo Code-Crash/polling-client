@@ -3,7 +3,7 @@ import './App.css';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-const BASE_URL = `http://localhost:3001`;
+const BASE_URL = process.env.REACT_APP_BASE_URL || `http://localhost:3001`;
 
 function App() {
   const [notifications, setNotifications] = useState([]);
@@ -16,7 +16,7 @@ function App() {
   }
 
   useEffect(() => {
-    const eventSource = new EventSource(`${BASE_URL}/subscribe/${clientId}`, { withCredentials: true });
+    const eventSource = new EventSource(`${BASE_URL}/subscribe/${clientId}`);
     eventSource.onmessage = (event) => {
       console.log('Received event:', event);
       setNotifications((prevNotifications) => [
@@ -57,7 +57,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Real-Time Notifications Using Polling</h1>
+      <h1>{process.env.REACT_APP_TITLE || 'Polling Client'}</h1>
       <input onChange={(e) => { setPayload(e.target.value) }} />
       <button onClick={sendEvent}>Send Event</button>
       <div className="Notifications">
