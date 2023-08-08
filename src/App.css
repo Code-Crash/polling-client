@@ -2,18 +2,18 @@
   text-align: center;
 }
 
-.App-logo {
+.loader {
   height: 40vmin;
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .loader {
+    animation: loader-spin infinite 20s linear;
   }
 }
 
-.App-header {
+.header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -24,15 +24,146 @@
   color: white;
 }
 
-.App-link {
+.link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+@keyframes loader-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.parent {
+  border: 1px solid #9c9c9c;
+  /* max-height: 200px; */
+  overflow: auto;
+  position: relative;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 5px #9c9c9c;
+}
+
+.parent .actions {
+  position: fixed;
+  text-align: center;
+  left: 0;
+  right: 0;
+  margin: 10px;
+}
+
+.parent .actions .component-name {
+  font-size: 15px;
+  font-weight: 800;
+  font-family: monospace;
+  margin: 10px;
+}
+
+.parent .notifications {
+  margin-top: 80px;
+}
+
+.parent .notifications .notification-contents {
+  max-height: 100px;
+  overflow: auto;
+  border: 0.5px solid grey;
+  margin: 5px;
+  border-radius: 4px;
+}
+
+code {
+  font-size: 10px;
+  font-weight: 500;
+  display: block;
+  white-space: pre-wrap;
+  margin: 0px;
+}
+
+h4 {
+  margin: 2px;
+}
+
+.children {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.child-component-a {
+  border: 1px solid #9c9c9c;
+  /* max-height: 200px; */
+  overflow: auto;
+  position: relative;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 1px #cfcfcf;
+}
+
+.child-component-a .actions {
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+  margin: 10px;
+}
+
+.child-component-a .actions .component-name {
+  font-size: 15px;
+  font-weight: 800;
+  font-family: monospace;
+  margin: 10px;
+}
+
+.child-component-a .notifications {
+  margin-top: 80px;
+}
+
+.child-component-a .notifications .notification-contents {
+  /* max-height: 100px; */
+  max-height: 30vh;
+  overflow: auto;
+  border: 0.5px solid grey;
+  margin: 5px;
+  border-radius: 4px;
+}
+
+.child-component-b {
+  border: 1px solid #9c9c9c;
+  /* max-height: 200px; */
+  overflow: auto;
+  position: relative;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 1px #cfcfcf;
+}
+
+.child-component-b .actions {
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+  margin: 10px;
+}
+
+.child-component-b .actions .component-name {
+  font-size: 15px;
+  font-weight: 800;
+  font-family: monospace;
+  margin: 10px;
+}
+
+.child-component-b .notifications {
+  margin-top: 80px;
+}
+
+.child-component-b .notifications .notification-contents {
+  /* max-height: 100px; */
+  max-height: 30vh;
+  overflow: auto;
+  border: 0.5px solid grey;
+  margin: 5px;
+  border-radius: 4px;
 }
