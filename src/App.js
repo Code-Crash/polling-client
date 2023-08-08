@@ -15,7 +15,7 @@ function App() {
   return (
     <EventEmitterProvider>
       <div className="App">
-        <h1>{process.env.REACT_APP_TITLE || 'Polling Client'}</h1>
+        <h1>{process.env.REACT_APP_TITLE || 'SSE Client'}</h1>
         <ParentComponent clientId={clientId} />
       </div>
     </EventEmitterProvider>
