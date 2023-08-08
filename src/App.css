@@ -85,6 +85,7 @@ code {
 
 h4 {
   margin: 2px;
+  font-size: 14px;
 }
 
 .children {
@@ -100,6 +101,8 @@ h4 {
   margin: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 5px 1px #cfcfcf;
+  width: 100%;
+  height: 55vh;
 }
 
 .child-component-a .actions {
@@ -123,11 +126,18 @@ h4 {
 
 .child-component-a .notifications .notification-contents {
   /* max-height: 100px; */
-  max-height: 30vh;
+  max-height: 25vh;
   overflow: auto;
   border: 0.5px solid grey;
   margin: 5px;
   border-radius: 4px;
+}
+
+.child-component-a .select-actions {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  justify-content: space-between;
 }
 
 .child-component-b {
@@ -138,6 +148,8 @@ h4 {
   margin: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 5px 1px #cfcfcf;
+  width: 100%;
+  height: 55vh;
 }
 
 .child-component-b .actions {
@@ -161,9 +173,16 @@ h4 {
 
 .child-component-b .notifications .notification-contents {
   /* max-height: 100px; */
-  max-height: 30vh;
+  max-height: 25vh;
   overflow: auto;
   border: 0.5px solid grey;
   margin: 5px;
   border-radius: 4px;
+}
+
+.child-component-b .select-actions {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  justify-content: space-between;
 }
