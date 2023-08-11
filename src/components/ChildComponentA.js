@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
-import { useEventEmitter } from '../EventEmitterContext';
-import { COMPONENT_KEYS } from '../constants';
+import { COMPONENT_KEYS, BASE_URL } from '../constants';
 import ChildComponentB from './ChildComponentB';
 import ParentComponent from './ParentComponent';
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || `http://localhost:3001`;
-
-const ChildComponentA = ({ clientId }) => {
-    const eventEmitter = useEventEmitter();
+/**
+ * A React component representing Child Component A with event handling.
+ * @param {Object} props - Component props.
+ * @param {string} props.clientId - The unique identifier of the client.
+ * @param {Object} props.eventEmitter - The event emitter for communication.
+ * @returns {JSX.Element} The rendered React component.
+ */
+const ChildComponentA = ({ clientId, eventEmitter }) => {
     const [notifications, setNotifications] = useState([]);
     const [selectedOptions, setSelectedOptions] = useState([]);
 
@@ -19,6 +22,7 @@ const ChildComponentA = ({ clientId }) => {
         { value: ParentComponent._key, label: ParentComponent._name },
     ];
 
+    // Subscribe to notifications from eventEmitter
     useEffect(() => {
         const handleNotification = (notification) => {
             setNotifications((prevNotifications) => [...prevNotifications, notification]);
@@ -32,6 +36,7 @@ const ChildComponentA = ({ clientId }) => {
         };
     }, [eventEmitter]);
 
+    // Send event to Server for this component
     const sendEvent = () => {
         axios.post(`${BASE_URL}/notify/${clientId}`,
             {
@@ -45,6 +50,7 @@ const ChildComponentA = ({ clientId }) => {
         });
     };
 
+    // Send event to specific components based on selected options
     const sendEventToComponent = () => {
         axios.post(`${BASE_URL}/notify/${clientId}`,
             {
@@ -63,10 +69,12 @@ const ChildComponentA = ({ clientId }) => {
         });
     };
 
+    // Handle selection change in the multi-select dropdown
     const onSelect = (selectedOptions) => {
         setSelectedOptions(selectedOptions);
     };
 
+    // Render component
     return (
         <div className="child-component-a">
             <div className='actions'>
@@ -97,6 +105,7 @@ const ChildComponentA = ({ clientId }) => {
     );
 };
 
+// Static properties for the ChildComponentA component
 ChildComponentA._name = 'Child Component A';
 ChildComponentA._key = 'child-component-a';
 

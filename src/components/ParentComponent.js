@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useEventEmitter } from '../EventEmitterContext';
+import { BASE_URL } from '../constants';
 import ChildComponentA from './ChildComponentA';
 import ChildComponentB from './ChildComponentB';
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || `http://localhost:3001`;
-
+/**
+ * A React component representing the parent component with event handling.
+ * @param {Object} props - Component props.
+ * @param {string} props.clientId - The unique identifier of the client.
+ * @returns {JSX.Element} The rendered React component.
+ */
 const ParentComponent = ({ clientId }) => {
     const eventEmitter = useEventEmitter();
     const [notifications, setNotifications] = useState([]);
     const [payload, setPayload] = useState('');
 
+    // Subscribe to notifications from Child Components
     useEffect(() => {
         const handleNotification = (notification) => {
             setNotifications((prevNotifications) => [...prevNotifications, notification]);
@@ -22,6 +28,7 @@ const ParentComponent = ({ clientId }) => {
         };
     }, [eventEmitter]);
 
+    // Establish connection to Server-Sent Events (SSE)
     useEffect(() => {
         const eventSource = new EventSource(`${BASE_URL}/subscribe/${clientId}`);
         eventSource.onmessage = (event) => {
@@ -60,6 +67,7 @@ const ParentComponent = ({ clientId }) => {
 
     }, [clientId]);
 
+    // Send event to Server
     const sendEvent = () => {
         axios.post(`${BASE_URL}/notify/${clientId}`,
             {
@@ -74,6 +82,7 @@ const ParentComponent = ({ clientId }) => {
         });
     };
 
+    // Render component
     return (
         <div className="parent">
             <div className='actions'>
@@ -90,8 +99,8 @@ const ParentComponent = ({ clientId }) => {
                 </div>
             </div>
             <div className='children'>
-                <ChildComponentA clientId={clientId} />
-                <ChildComponentB clientId={clientId} />
+                <ChildComponentA clientId={clientId} eventEmitter={eventEmitter} />
+                <ChildComponentB clientId={clientId} eventEmitter={eventEmitter} />
             </div>
         </div>
     );
